@@ -1,50 +1,50 @@
-const inputArray = process.env.INPUT_ARRAY
 const inputMode = process.env.MODE
+const { log, error } = console
 
+log('ListTransform Node Application')
 
-let parsedArray
+log('Reading parameters...')
+
 try {
-    parsedArray = JSON.parse(inputArray)
+    inputArray = require('/data/inputs/INPUT_ARRAY.json')
 } catch {
-    console.log("INPUT_ARRAY is not valid")
+    log("INPUT_ARRAY is not valid")
 }
 
-console.log({ parsedArray })
-console.log({ type: typeof parsedArray })
-
-let parsedMode
-parsedModeValid = ['head', 'tail'].includes(inputMode)
-if (!parsedModeValid) {
+inputModeValid = ['head', 'tail'].includes(inputMode)
+if (!inputModeValid) {
     throw "Given mode invalid – please specify `head` or `tail`"
-} else {
-    parsedMode = inputMode
 }
 
-console.log({ parsedMode })
-console.log({ type: typeof parsedMode })
+log('Parameters successfully read:')
+log(`MODE=${inputMode}`)
+log(`INPUT_ARRAY=${inputArray}`)
 
+log('Running...')
 
 let outputValue
-parsedArray.forEach(
+inputArray.forEach(
     (arrayMember) => {
-        if (parsedMode == 'head') {
-            outputValue = parsedArray[0]
-        } else if (parsedMode == 'tail') {
-            outputValue = parsedArray.slice(1)
+        if (inputMode == 'head') {
+            outputValue = inputArray[0]
+        } else if (inputMode == 'tail') {
+            outputValue = inputArray.slice(1)
         }
     }
 )
 
-console.log({ outputValue })
+log('Result:')
+log(outputValue)
 
 fs = require('fs')
 
 const stringifiedOutput = outputValue.toString()
 
-fs.writeFile('/data/outputs/result.csv', stringifiedOutput, err => {
+log("Writing output to file...")
+fs.writeFile('/data/outputs/result.json', stringifiedOutput, err => {
     if (err) {
-        console.error(err)
+        error(err)
         return
     }
-    console.log("Output written successfully")
+    log("Output written successfully")
 })
