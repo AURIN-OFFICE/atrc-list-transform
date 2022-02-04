@@ -5,3 +5,7 @@ inputs:
   INPUT_MODE:
     type: value
     value: 'head'
+outputs:
+  RESULT:
+    type: json
+    path: /data/outputs/result.json

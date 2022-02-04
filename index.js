@@ -6,8 +6,8 @@ log('ListTransform Node Application')
 log('Reading parameters...')
 
 fileContents = fs.readFileSync('/data/parameters.yaml', 'utf8');
-data = yaml.load(fileContents);
-inputs = data.inputs
+parameters = yaml.load(fileContents);
+inputs = parameters.inputs
 
 function getValueFromConfig(inputName) {
     inputDefinition = inputs[inputName]
@@ -23,6 +23,8 @@ function getValueFromConfig(inputName) {
 
 const inputArray = getValueFromConfig("INPUT_ARRAY")
 const inputMode = getValueFromConfig("INPUT_MODE")
+
+const outputPath = parameters.outputs.RESULT.path
 
 inputModeValid = ['head', 'tail'].includes(inputMode)
 if (!inputModeValid) {
@@ -54,7 +56,7 @@ fs = require('fs')
 const stringifiedOutput = outputValue.toString()
 
 log("Writing output to file...")
-fs.writeFile('/data/outputs/result.json', stringifiedOutput, err => {
+fs.writeFile(outputPath, stringifiedOutput, err => {
     if (err) {
         error(err)
         return
