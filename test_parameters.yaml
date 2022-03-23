@@ -1,11 +1,11 @@
 inputs:
   INPUT_ARRAY:
     type: path
-    path: /data/inputs/INPUT_ARRAY.json
+    path: /atrc_data/inputs/INPUT_ARRAY.json
   INPUT_MODE:
     type: value
     value: 'head'
 outputs:
   RESULT:
     type: json
-    path: /data/outputs/result.json
+    path: /atrc_data/outputs/result.json

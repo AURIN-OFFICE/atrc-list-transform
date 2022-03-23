@@ -5,7 +5,7 @@ const { log, error } = console
 log('ListTransform Node Application')
 log('Reading parameters...')
 
-fileContents = fs.readFileSync('/data/parameters.yaml', 'utf8');
+fileContents = fs.readFileSync('/atrc_data/parameters.yaml', 'utf8');
 parameters = yaml.load(fileContents);
 inputs = parameters.inputs
 
